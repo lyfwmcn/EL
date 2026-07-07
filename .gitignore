@@ -1,2 +1,4 @@
 .vscode/
 .omo/
+dbGateway/venv/
+dbGateway/.env
