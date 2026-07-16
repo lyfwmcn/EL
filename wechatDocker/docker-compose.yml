@@ -1,0 +1,21 @@
+version: '3.8'
+services:
+  wx-exporter:
+    image: ghcr.io/wechat-article/wechat-article-exporter:latest
+    container_name: wx-exporter
+    ports:
+      - "3000:3000"
+    volumes:
+      - ./wx_cache:/app/.data
+      - ./export_file:/app/exports
+    restart: unless-stopped
+
+  chrome:
+    image: browserless/chrome:latest
+    container_name: chrome-render
+    ports:
+      - "9222:3000"
+    environment:
+      - MAX_CONCURRENT_SESSIONS=3
+      - CONNECTION_TIMEOUT=60000
+    restart: unless-stopped
